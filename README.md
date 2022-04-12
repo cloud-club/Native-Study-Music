@@ -1,4 +1,4 @@
-# Native-Study-API
+# Native-Study-Music
 
 멜론에서 스크랩핑한 음원 정보를 MongoDB에 저장해주는 Service 입니다.
 
