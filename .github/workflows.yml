@@ -1,0 +1,41 @@
+name: push-harbor
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  repository_dispatch:
+    types: [master_push]
+    
+env:
+  HARBOR_ADDRESS: ${{secrets.HARBOR_ADDRESS}}
+  HARBOR_PASSWORD: ${{secrets.HARBOR_PASSWORD}}
+  HARBOR_USERNAME: ${{secrets.HARBOR_USERNAME}}
+  WORKING_DIRECTORY: cloudclub-workfolder
+  SERVICE: music
+  
+jobs:
+
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    # Harbor Login
+    - name: Harbor login
+      run: docker login ${{env.HARBOR_ADDRESS}} -u ${{env.HARBOR_USERNAME}} -p ${{env.HARBOR_PASSWORD}}
+    
+    # Build Image
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ${{env.SERVICE}}:latest
+  
+    # Image Tagging
+    - name: Image tagging
+      run: docker tag mypython:latest ${{env.HARBOR_ADDRESS}}/${{env.SERVICE}}/${{env.SERVICE}}:latest
+
+    # Image Push
+    - name: Push image to Harbor
+      run: docker push ${{env.HARBOR_ADDRESS}}/${{env.SERVICE}}/${{env.SERVICE}}:latest
