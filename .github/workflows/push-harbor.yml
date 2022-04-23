@@ -34,7 +34,7 @@ jobs:
   
     # Image Tagging
     - name: Image tagging
-      run: docker tag mypython:latest ${{env.HARBOR_ADDRESS}}/${{env.SERVICE}}/${{env.SERVICE}}:latest
+      run: docker tag ${{env.SERVICE}}:latest ${{env.HARBOR_ADDRESS}}/${{env.SERVICE}}/${{env.SERVICE}}:latest
 
     # Image Push
     - name: Push image to Harbor
