@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        run: music-deploy-test
+        run: music-test
     spec:
       containers:
         - image: 52.79.185.138/music/music:latest
