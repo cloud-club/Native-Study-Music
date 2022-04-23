@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: music-service
+spec:
+  type: NodePort
+  selector:
+    run: music-test
+  ports:
+      # 기본적으로 그리고 편의상 `targetPort` 는 `port` 필드와 동일한 값으로 설정된다.
+    - port: 80
+      targetPort: 80
+      nodePort: 30016
