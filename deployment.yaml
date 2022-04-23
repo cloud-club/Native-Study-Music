@@ -16,3 +16,5 @@ spec:
         - image: 52.79.185.138/music/music:latest
           imagePullPolicy: Always
           name: music-test-pod
+          ports:
+          - containerPort: 80
