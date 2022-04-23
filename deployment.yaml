@@ -6,7 +6,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      run: music-deploy-test
+      run: music-test
   template:
     metadata:
       labels:
