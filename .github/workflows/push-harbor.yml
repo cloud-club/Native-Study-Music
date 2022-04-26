@@ -11,6 +11,7 @@ on:
     
 env:
   HARBOR_ADDRESS: ${{secrets.HARBOR_ADDRESS}}
+  HARBOR_FULL_ADDRESS: ${{secrets.HARBOR_FULL_ADDRESS}}
   HARBOR_PASSWORD: ${{secrets.HARBOR_PASSWORD}}
   HARBOR_USERNAME: ${{secrets.HARBOR_USERNAME}}
   WORKING_DIRECTORY: cloudclub-workfolder
@@ -26,7 +27,7 @@ jobs:
     
     # Harbor Login
     - name: Harbor login
-      run: docker login ${{env.HARBOR_ADDRESS}} -u ${{env.HARBOR_USERNAME}} -p ${{env.HARBOR_PASSWORD}}
+      run: docker login ${{env.HARBOR_FULL_ADDRESS}} -u ${{env.HARBOR_USERNAME}} -p ${{env.HARBOR_PASSWORD}}
     
     # Build Image
     - name: Build the Docker image
